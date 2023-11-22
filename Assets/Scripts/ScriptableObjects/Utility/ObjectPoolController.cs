@@ -10,6 +10,7 @@ public class ObjectPoolController : ScriptableObject
 
     ObjectPool _objectPool;
 
+    public GameObject prefab { get { return _objectPrefab; } }
     public void AssignObjectPool(ObjectPool p_objectPool)
     {
         _objectPool = p_objectPool;

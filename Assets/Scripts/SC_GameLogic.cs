@@ -51,31 +51,35 @@ public class SC_GameLogic : MonoBehaviour
                 _bgTile.transform.SetParent(unityObjects["GemsHolder"].transform);
                 _bgTile.name = "BG Tile - " + x + ", " + y;
 
-                int _gemToUse = Random.Range(0, SC_GameVariables.Instance.gems.Length);
+                int _gemToUse = Random.Range(0, SC_GameVariables.Instance.gemObjectPools.Length);
 
                 int iterations = 0;
-                while (gameBoard.MatchesAt(new Vector2Int(x, y), SC_GameVariables.Instance.gems[_gemToUse]) && iterations < 100)
+                while (gameBoard.MatchesAt(new Vector2Int(x, y), SC_GameVariables.Instance.gemObjectPools[_gemToUse].prefab.GetComponent<SC_Gem>()) && iterations < 100)
                 {
-                    _gemToUse = Random.Range(0, SC_GameVariables.Instance.gems.Length);
+                    _gemToUse = Random.Range(0, SC_GameVariables.Instance.gemObjectPools.Length);
                     iterations++;
                 }
-                SpawnGem(new Vector2Int(x, y), SC_GameVariables.Instance.gems[_gemToUse]);
+                SpawnGem(new Vector2Int(x, y), SC_GameVariables.Instance.gemObjectPools[_gemToUse]);
             }
     }
     public void StartGame()
     {
         unityObjects["Txt_Score"].GetComponent<TextMeshProUGUI>().text = score.ToString("0");
     }
-    private void SpawnGem(Vector2Int _Position, SC_Gem _GemToSpawn)
+    private void SpawnGem(Vector2Int _Position, ObjectPoolController _GemObjectPoolController)
     {
         if (Random.Range(0, 100f) < SC_GameVariables.Instance.bombChance)
-            _GemToSpawn = SC_GameVariables.Instance.bomb;
+            _GemObjectPoolController = SC_GameVariables.Instance.bombObjectPool;
 
-        SC_Gem _gem = Instantiate(_GemToSpawn, new Vector3(_Position.x, _Position.y + SC_GameVariables.Instance.dropHeight, 0f), Quaternion.identity);
+        SC_Gem _gem = _GemObjectPoolController.GetObject().GetComponent<SC_Gem>();
+        _gem.transform.position = new Vector3(_Position.x, _Position.y + SC_GameVariables.Instance.dropHeight, 0f);
+        _gem.transform.rotation = Quaternion.identity;
         _gem.transform.SetParent(unityObjects["GemsHolder"].transform);
         _gem.name = "Gem - " + _Position.x + ", " + _Position.y;
         gameBoard.SetGem(_Position.x,_Position.y, _gem);
         _gem.SetupGem(this,_Position);
+        _gem.objectPoolController = _GemObjectPoolController;
+        _gem.gameObject.SetActive(true);
     }
     public void SetGem(int _X,int _Y, SC_Gem _Gem)
     {
@@ -138,7 +142,8 @@ public class SC_GameLogic : MonoBehaviour
         {
             Instantiate(_curGem.destroyEffect, new Vector2(_Pos.x, _Pos.y), Quaternion.identity);
 
-            Destroy(_curGem.gameObject);
+            _curGem.objectPoolController.ReturnObject(_curGem.gameObject);
+            //Destroy(_curGem.gameObject);
             SetGem(_Pos.x,_Pos.y, null);
         }
     }
@@ -169,8 +174,8 @@ public class SC_GameLogic : MonoBehaviour
                 SC_Gem _curGem = gameBoard.GetGem(x,y);
                 if (_curGem == null)
                 {
-                    int gemToUse = Random.Range(0, SC_GameVariables.Instance.gems.Length);
-                    SpawnGem(new Vector2Int(x, y), SC_GameVariables.Instance.gems[gemToUse]);
+                    int gemToUse = Random.Range(0, SC_GameVariables.Instance.gemObjectPools.Length);
+                    SpawnGem(new Vector2Int(x, y), SC_GameVariables.Instance.gemObjectPools[gemToUse]);
                 }
             }
         }
@@ -191,7 +196,8 @@ public class SC_GameLogic : MonoBehaviour
         }
 
         foreach (SC_Gem g in foundGems)
-            Destroy(g.gameObject);
+            g.objectPoolController.ReturnObject(g.gameObject);
+                //Destroy(g.gameObject);
     }
     public void FindAllMatches()
     {

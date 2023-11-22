@@ -20,6 +20,7 @@ public class SC_Gem : MonoBehaviour
     public int scoreValue = 10;
 
     public int blastSize = 1;
+    public ObjectPoolController objectPoolController;
     private SC_GameLogic scGameLogic;
 
     void Update()
