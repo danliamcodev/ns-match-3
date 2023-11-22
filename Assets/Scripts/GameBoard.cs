@@ -14,6 +14,9 @@ public class GameBoard
     public int Width { get { return width; } }
   
     private SC_Gem[,] allGems;
+
+    private List<SC_Gem> bombRewardMarked = new List<SC_Gem>();
+    public List<Vector2Int> bombRewardSpawnLocs = new List<Vector2Int>();
   //  public Gem[,] AllGems { get { return allGems; } }
 
     private int score = 0;
@@ -84,7 +87,6 @@ public class GameBoard
                 allGems[_PositionToCheck.x, _PositionToCheck.y + 2].type == _GemToCheck.type)
                 match = true;
         }
-        Debug.Log(match);
         return match;
     }
 
@@ -100,6 +102,8 @@ public class GameBoard
     public void FindAllMatches()
     {
         currentMatches.Clear();
+        bombRewardMarked.Clear();
+        bombRewardSpawnLocs.Clear();
 
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
@@ -111,6 +115,8 @@ public class GameBoard
                     {
                         SC_Gem leftGem = allGems[x - 1, y];
                         SC_Gem rightGem = allGems[x + 1, y];
+         
+     
                         //checking no empty spots
                         if (leftGem != null && rightGem != null)
                         {
@@ -123,6 +129,34 @@ public class GameBoard
                                 currentMatches.Add(currentGem);
                                 currentMatches.Add(leftGem);
                                 currentMatches.Add(rightGem);
+
+                                if (x > 1)
+                                {
+                                    SC_Gem leftMostGem = allGems[x - 2, y];
+                                    if (leftMostGem.type == currentGem.type && !(bombRewardMarked.Contains(leftMostGem) || bombRewardMarked.Contains(currentGem)))
+                                    {
+                                        bombRewardMarked.Add(currentGem);
+                                        bombRewardMarked.Add(leftGem);
+                                        bombRewardMarked.Add(rightGem);
+                                        bombRewardMarked.Add(leftMostGem);
+                                        bombRewardSpawnLocs.Add(new Vector2Int(x, y));
+                                        Debug.Log("4 in a row");
+                                    }
+                                }
+
+                                if (x < width - 2)
+                                {
+                                    SC_Gem rightMostGem = allGems[x + 2, y];
+                                    if (rightMostGem.type == currentGem.type && !(bombRewardMarked.Contains(rightMostGem) || bombRewardMarked.Contains(currentGem)))
+                                    {
+                                        bombRewardMarked.Add(currentGem);
+                                        bombRewardMarked.Add(leftGem);
+                                        bombRewardMarked.Add(rightGem);
+                                        bombRewardMarked.Add(rightMostGem);
+                                        bombRewardSpawnLocs.Add(new Vector2Int(x, y));
+                                        Debug.Log("4 in a row");
+                                    }
+                                }
                             }
                         }
                     }
@@ -131,6 +165,8 @@ public class GameBoard
                     {
                         SC_Gem aboveGem = allGems[x, y - 1];
                         SC_Gem bellowGem = allGems[x, y + 1];
+
+         
                         //checking no empty spots
                         if (aboveGem != null && bellowGem != null)
                         {
@@ -143,6 +179,35 @@ public class GameBoard
                                 currentMatches.Add(currentGem);
                                 currentMatches.Add(aboveGem);
                                 currentMatches.Add(bellowGem);
+
+
+                                if (y > 1)
+                                {
+                                    SC_Gem aboveMostGem = allGems[x, y - 2];
+                                    if (aboveMostGem.type == currentGem.type && !(bombRewardMarked.Contains(aboveMostGem) || bombRewardMarked.Contains(currentGem)))
+                                    {
+                                        bombRewardMarked.Add(currentGem);
+                                        bombRewardMarked.Add(aboveGem);
+                                        bombRewardMarked.Add(bellowGem);
+                                        bombRewardMarked.Add(aboveMostGem);
+                                        bombRewardSpawnLocs.Add(new Vector2Int(x, y));
+                                        Debug.Log("4 in a row");
+                                    }
+                                }
+
+                                if (y < height - 2)
+                                {
+                                    SC_Gem belowMostGem = allGems[x, y + 2];
+                                    if (belowMostGem.type == currentGem.type && !(bombRewardMarked.Contains(belowMostGem) || bombRewardMarked.Contains(currentGem)))
+                                    {
+                                        bombRewardMarked.Add(currentGem);
+                                        bombRewardMarked.Add(aboveGem);
+                                        bombRewardMarked.Add(bellowGem);
+                                        bombRewardMarked.Add(belowMostGem);
+                                        bombRewardSpawnLocs.Add(new Vector2Int(x, y));
+                                        Debug.Log("4 in a row");
+                                    }
+                                }
                             }
                         }
                     }

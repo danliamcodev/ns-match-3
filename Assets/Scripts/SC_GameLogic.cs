@@ -109,7 +109,28 @@ public class SC_GameLogic : MonoBehaviour
                 DestroyMatchedGemsAt(gameBoard.CurrentMatches[i].posIndex);
             }
 
+        if (gameBoard.bombRewardSpawnLocs.Count > 0)
+        {
+            foreach (Vector2Int bombRewardSpawnLoc in gameBoard.bombRewardSpawnLocs)
+            SpawnBombReward(bombRewardSpawnLoc);
+        }
+
         StartCoroutine(DecreaseRowCo());
+    }
+
+    private void SpawnBombReward(Vector2Int p_vector2Int)
+    {
+        SC_Gem _gem = SC_GameVariables.Instance.bombObjectPool.GetObject().GetComponent<SC_Gem>();
+
+
+        _gem.transform.position = new Vector3(p_vector2Int.x, p_vector2Int.y, 0f);
+        _gem.transform.rotation = Quaternion.identity;
+        _gem.transform.SetParent(unityObjects["GemsHolder"].transform);
+        _gem.name = "Gem - " + p_vector2Int.x + ", " + p_vector2Int.y;
+        gameBoard.SetGem(p_vector2Int.x, p_vector2Int.y, _gem);
+        _gem.SetupGem(this, p_vector2Int);
+        _gem.objectPoolController = SC_GameVariables.Instance.bombObjectPool;
+        _gem.gameObject.SetActive(true);
     }
     private IEnumerator DecreaseRowCo()
     {
@@ -187,7 +208,6 @@ public class SC_GameLogic : MonoBehaviour
                     {
                         gemToUse = Random.Range(0, SC_GameVariables.Instance.gemObjectPools.Length);
                         iterations++;
-                        print(iterations);
                     }
                     SpawnGem(new Vector2Int(x, y), SC_GameVariables.Instance.gemObjectPools[gemToUse]);
                 }
