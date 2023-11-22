@@ -156,7 +156,16 @@ public class SC_GameLogic : MonoBehaviour
             nullCounter = 0;
         }
 
-        StartCoroutine(FilledBoardCo());
+        if (gameBoard.bombsToDetonate.Count > 0)
+        {
+            yield return new WaitForSeconds(0.8f);
+            gameBoard.DetonateBombs();
+            DestroyMatches();
+        } else
+        {
+            StartCoroutine(FilledBoardCo());
+        }
+
     }
 
     public void ScoreCheck(SC_Gem gemToCheck)

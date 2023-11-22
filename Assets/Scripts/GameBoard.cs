@@ -17,6 +17,7 @@ public class GameBoard
 
     private List<SC_Gem> bombRewardMarked = new List<SC_Gem>();
     public List<Vector2Int> bombRewardSpawnLocs = new List<Vector2Int>();
+    public List<SC_Gem> bombsToDetonate = new List<SC_Gem>();
   //  public Gem[,] AllGems { get { return allGems; } }
 
     private int score = 0;
@@ -231,48 +232,63 @@ public class GameBoard
             if (gem.posIndex.x > 0)
             {
                 if (allGems[x - 1, y] != null && allGems[x - 1, y].type == GlobalEnums.GemType.bomb)
-                    MarkBombArea(new Vector2Int(x - 1, y), allGems[x - 1, y].blastSize);
+                    bombsToDetonate.Add(allGems[x - 1, y]);
             }
 
             if (gem.posIndex.x + 1 < width)
             {
                 if (allGems[x + 1, y] != null && allGems[x + 1, y].type == GlobalEnums.GemType.bomb)
-                    MarkBombArea(new Vector2Int(x + 1, y), allGems[x + 1, y].blastSize);
+                    bombsToDetonate.Add(allGems[x + 1, y]);
             }
 
             if (gem.posIndex.y > 0)
             {
                 if (allGems[x, y - 1] != null && allGems[x, y - 1].type == GlobalEnums.GemType.bomb)
-                    MarkBombArea(new Vector2Int(x, y - 1), allGems[x, y - 1].blastSize);
+                    bombsToDetonate.Add(allGems[x, y - 1]);
             }
 
             if (gem.posIndex.y + 1 < height)
             {
                 if (allGems[x, y + 1] != null && allGems[x, y + 1].type == GlobalEnums.GemType.bomb)
-                    MarkBombArea(new Vector2Int(x, y + 1), allGems[x, y + 1].blastSize);
+                    bombsToDetonate.Add(allGems[x, y + 1]);
             }
         }
     }
 
-    public void MarkBombArea(Vector2Int bombPos, int _BlastSize)
+    public void DetonateBombs()
     {
-        string _print = "";
-        for (int x = bombPos.x - _BlastSize; x <= bombPos.x + _BlastSize; x++)
+        for (int i = bombsToDetonate.Count - 1; i >= 0; i--)
         {
-            for (int y = bombPos.y - _BlastSize; y <= bombPos.y + _BlastSize; y++)
+            DetonateBomb(bombsToDetonate[i]);
+        }
+        currentMatches = currentMatches.Distinct().ToList();
+    }
+
+    private void DetonateBomb(SC_Gem p_bomb)
+    {
+        Vector2Int bombPos = p_bomb.posIndex;
+        for (int x = bombPos.x - p_bomb.blastSize; x <= bombPos.x + p_bomb.blastSize; x++)
+        {
+            for (int y = bombPos.y - p_bomb.blastSize; y <= bombPos.y + p_bomb.blastSize; y++)
             {
                 if (x >= 0 && x < width && y >= 0 && y < height)
                 {
                     if (allGems[x, y] != null)
                     {
-                        _print += "(" + x + "," + y + ")" + System.Environment.NewLine;
-                        allGems[x, y].isMatch = true;
-                        currentMatches.Add(allGems[x, y]);
+                        if (allGems[x,y].type == GlobalEnums.GemType.bomb && allGems[x,y] != p_bomb)
+                        {
+                            Debug.Log("NEW BOMB");
+                            bombsToDetonate.Add(allGems[x, y]);
+                        } else
+                        {
+                            allGems[x, y].isMatch = true;
+                            currentMatches.Add(allGems[x, y]);
+                        }
                     }
                 }
             }
         }
-        currentMatches = currentMatches.Distinct().ToList();
+        bombsToDetonate.Remove(p_bomb);
     }
 }
 
