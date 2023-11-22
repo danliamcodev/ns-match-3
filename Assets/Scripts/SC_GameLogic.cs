@@ -20,6 +20,7 @@ public class SC_GameLogic : MonoBehaviour
 
     private void Start()
     {
+        Setup();
         StartGame();
     }
 
@@ -39,7 +40,6 @@ public class SC_GameLogic : MonoBehaviour
             unityObjects.Add(g.name,g);
 
         gameBoard = new GameBoard(7, 7);
-        Setup();
     }
     private void Setup()
     {
@@ -72,15 +72,22 @@ public class SC_GameLogic : MonoBehaviour
             _GemObjectPoolController = SC_GameVariables.Instance.bombObjectPool;
 
         SC_Gem _gem = _GemObjectPoolController.GetObject().GetComponent<SC_Gem>();
+
+
         _gem.transform.position = new Vector3(_Position.x, _Position.y + SC_GameVariables.Instance.dropHeight, 0f);
         _gem.transform.rotation = Quaternion.identity;
         _gem.transform.SetParent(unityObjects["GemsHolder"].transform);
         _gem.name = "Gem - " + _Position.x + ", " + _Position.y;
-        gameBoard.SetGem(_Position.x,_Position.y, _gem);
-        _gem.SetupGem(this,_Position);
+
+        int checks = 0;
+     
+
+        gameBoard.SetGem(_Position.x, _Position.y, _gem);
+        _gem.SetupGem(this, _Position);
         _gem.objectPoolController = _GemObjectPoolController;
         _gem.gameObject.SetActive(true);
     }
+
     public void SetGem(int _X,int _Y, SC_Gem _Gem)
     {
         gameBoard.SetGem(_X,_Y, _Gem);
@@ -175,6 +182,13 @@ public class SC_GameLogic : MonoBehaviour
                 if (_curGem == null)
                 {
                     int gemToUse = Random.Range(0, SC_GameVariables.Instance.gemObjectPools.Length);
+                    int iterations = 0;
+                    while (gameBoard.MatchesAt(new Vector2Int(x, y), SC_GameVariables.Instance.gemObjectPools[gemToUse].prefab.GetComponent<SC_Gem>()) && iterations < 100)
+                    {
+                        gemToUse = Random.Range(0, SC_GameVariables.Instance.gemObjectPools.Length);
+                        iterations++;
+                        print(iterations);
+                    }
                     SpawnGem(new Vector2Int(x, y), SC_GameVariables.Instance.gemObjectPools[gemToUse]);
                 }
             }

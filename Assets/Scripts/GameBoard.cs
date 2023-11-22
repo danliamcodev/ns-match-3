@@ -35,21 +35,57 @@ public class GameBoard
     }
     public bool MatchesAt(Vector2Int _PositionToCheck, SC_Gem _GemToCheck)
     {
+        bool match = false;
+
+        if (_PositionToCheck.x > 0 && _PositionToCheck.x < width - 1 && allGems[_PositionToCheck.x + 1, _PositionToCheck.y] != null)
+        {
+            if (allGems[_PositionToCheck.x - 1, _PositionToCheck.y].type == _GemToCheck.type &&
+                allGems[_PositionToCheck.x + 1, _PositionToCheck.y].type == _GemToCheck.type)
+                match = true;
+        }
+
+        if (_PositionToCheck.y > 0 && _PositionToCheck.y < height - 1 && allGems[_PositionToCheck.x, _PositionToCheck.y + 1] != null)
+        {
+            if (allGems[_PositionToCheck.x, _PositionToCheck.y - 1].type == _GemToCheck.type &&
+                allGems[_PositionToCheck.x, _PositionToCheck.y + 1].type == _GemToCheck.type)
+                match = true;
+        }
+
         if (_PositionToCheck.x > 1)
         {
             if (allGems[_PositionToCheck.x - 1, _PositionToCheck.y].type == _GemToCheck.type &&
                 allGems[_PositionToCheck.x - 2, _PositionToCheck.y].type == _GemToCheck.type)
-                return true;
+                match = true;
+            //string gemTypes = string.Format("{0} {1} {2}", firstName, lastName, );
         }
 
         if (_PositionToCheck.y > 1)
         {
             if (allGems[_PositionToCheck.x, _PositionToCheck.y - 1].type == _GemToCheck.type &&
                 allGems[_PositionToCheck.x, _PositionToCheck.y - 2].type == _GemToCheck.type)
-                return true;
+                match = true;
         }
 
-        return false;
+        if (_PositionToCheck.x < width - 2 && _PositionToCheck.x >= 0)
+        {
+            if (allGems[_PositionToCheck.x + 1, _PositionToCheck.y] != null && allGems[_PositionToCheck.x + 2, _PositionToCheck.y] != null)
+            {
+                if (allGems[_PositionToCheck.x + 1, _PositionToCheck.y].type == _GemToCheck.type &&
+                    allGems[_PositionToCheck.x + 2, _PositionToCheck.y].type == _GemToCheck.type)
+                    match = true;
+            }
+        }
+
+ 
+
+        if (_PositionToCheck.y >= 0 && _PositionToCheck.y < height - 2 && allGems[_PositionToCheck.x, _PositionToCheck.y + 1] != null && allGems[_PositionToCheck.x, _PositionToCheck.y + 2] != null)
+        {
+            if (allGems[_PositionToCheck.x, _PositionToCheck.y + 1].type == _GemToCheck.type &&
+                allGems[_PositionToCheck.x, _PositionToCheck.y + 2].type == _GemToCheck.type)
+                match = true;
+        }
+        Debug.Log(match);
+        return match;
     }
 
     public void SetGem(int _X, int _Y, SC_Gem _Gem)
