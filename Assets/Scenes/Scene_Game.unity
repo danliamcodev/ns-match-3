@@ -281,6 +281,10 @@ GameObject:
   m_Component:
   - component: {fileID: 376092240}
   - component: {fileID: 376092241}
+  - component: {fileID: 376092242}
+  - component: {fileID: 376092243}
+  - component: {fileID: 376092244}
+  - component: {fileID: 376092245}
   m_Layer: 0
   m_Name: SC_GameLogic
   m_TagString: Untagged
@@ -315,6 +319,132 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db185b18195d3814aab9ba4ac5f95047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _setupBoard: {fileID: 11400000, guid: e24532c8d3fb406449a5b5e5b205b33b, type: 2}
+  _findAllMatches: {fileID: 11400000, guid: 9d703d39d3f29de46b4badd6fdffd0f7, type: 2}
+  _destroyAllMatches: {fileID: 11400000, guid: 74d4c9d7917bcfc4c824947db9e66754, type: 2}
+  _cascadeGems: {fileID: 11400000, guid: 9f05c8cebed10c249a1d981ca67b1f24, type: 2}
+  _markGemsToExplode: {fileID: 11400000, guid: b8aa06a53d2f6f24d899926038cde3f6, type: 2}
+  _explodeGemsMarkedByBombs: {fileID: 11400000, guid: 30b9dc484046ec14a8bc32ec41583988,
+    type: 2}
+  _checkMisplacedGems: {fileID: 11400000, guid: f7d12498fcbb9044799c1a238519bf62,
+    type: 2}
+  _refillBoard: {fileID: 11400000, guid: 51f91f77b704daf4dafa1100de6d2bd8, type: 2}
+  _currentMatches: {fileID: 11400000, guid: 370829c4aab3586478cc3ef361ab09b6, type: 2}
+  _bombsToDetonate: {fileID: 11400000, guid: c862b99bed112094da72c5677c0015dd, type: 2}
+  _gameBoardReference: {fileID: 11400000, guid: 454b3dc0fb000244db78a8aa49f0dc9f,
+    type: 2}
+--- !u!114 &376092242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376092239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: db03715b1e4dc2b48ba30a7ebcc59c1a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 376092241}
+        m_TargetAssemblyTypeName: SC_GameLogic, Assembly-CSharp
+        m_MethodName: OnMatchesDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &376092243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376092239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: ea0108e77cc4ef54397c6233e1d08a2a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 376092241}
+        m_TargetAssemblyTypeName: SC_GameLogic, Assembly-CSharp
+        m_MethodName: OnBoardRefilled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &376092244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376092239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 6198ae339eac8e14396dc1f7f4e2bf1d, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 376092241}
+        m_TargetAssemblyTypeName: SC_GameLogic, Assembly-CSharp
+        m_MethodName: OnGemsCascaded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &376092245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376092239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97c187ac5bf6354f99dbf3f7353e277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: dcd013e1d28f0fd469f0bee8d601110e, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 376092241}
+        m_TargetAssemblyTypeName: SC_GameLogic, Assembly-CSharp
+        m_MethodName: ScoreCheck
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1359,21 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1879498210}
+  - component: {fileID: 1879498212}
+  - component: {fileID: 1879498217}
+  - component: {fileID: 1879498211}
+  - component: {fileID: 1879498218}
+  - component: {fileID: 1879498221}
+  - component: {fileID: 1879498215}
+  - component: {fileID: 1879498213}
+  - component: {fileID: 1879498214}
+  - component: {fileID: 1879498216}
+  - component: {fileID: 1879498219}
+  - component: {fileID: 1879498220}
+  - component: {fileID: 1879498222}
+  - component: {fileID: 1879498224}
+  - component: {fileID: 1879498223}
+  - component: {fileID: 1879498225}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -1254,6 +1399,380 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1879498211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d908d47f73fefe449576b2be057aedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameBoardReference: {fileID: 11400000, guid: 454b3dc0fb000244db78a8aa49f0dc9f,
+    type: 2}
+--- !u!114 &1879498212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d68fc245efd3b4dbcab0f37e8dc2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boardRefilled: {fileID: 11400000, guid: ea0108e77cc4ef54397c6233e1d08a2a, type: 2}
+  _gemsCascaded: {fileID: 11400000, guid: 6198ae339eac8e14396dc1f7f4e2bf1d, type: 2}
+  _gemsHolder: {fileID: 1740955908}
+  _gameLogic: {fileID: 376092241}
+  _gameBoardReference: {fileID: 11400000, guid: 454b3dc0fb000244db78a8aa49f0dc9f,
+    type: 2}
+  _currentMatches: {fileID: 11400000, guid: 370829c4aab3586478cc3ef361ab09b6, type: 2}
+  _bombSpawnPositions: {fileID: 11400000, guid: 16f8603838c2d0f488b8771b943aa754,
+    type: 2}
+  _dropTime: 0.5
+--- !u!114 &1879498213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 51f91f77b704daf4dafa1100de6d2bd8, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498212}
+        m_TargetAssemblyTypeName: GemSpawner, Assembly-CSharp
+        m_MethodName: RefillBoard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: f7d12498fcbb9044799c1a238519bf62, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498211}
+        m_TargetAssemblyTypeName: MisplacedGemsHandler, Assembly-CSharp
+        m_MethodName: CheckMisplacedGems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: e24532c8d3fb406449a5b5e5b205b33b, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498212}
+        m_TargetAssemblyTypeName: GemSpawner, Assembly-CSharp
+        m_MethodName: SpawnStartingGems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 9d703d39d3f29de46b4badd6fdffd0f7, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498217}
+        m_TargetAssemblyTypeName: MatchFinder, Assembly-CSharp
+        m_MethodName: FindAllMatches
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf85e0e69dc209849850332ac24a7ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minMatchThreshold: 3
+  _currentMatches: {fileID: 11400000, guid: 370829c4aab3586478cc3ef361ab09b6, type: 2}
+  _gameBoardReference: {fileID: 11400000, guid: 454b3dc0fb000244db78a8aa49f0dc9f,
+    type: 2}
+  _bombSpawnPositions: {fileID: 11400000, guid: 16f8603838c2d0f488b8771b943aa754,
+    type: 2}
+--- !u!114 &1879498218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083514a076fa9e942ab8f6aa2cc4c053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _markBombsToDetonate: {fileID: 11400000, guid: f1cc55b33fecb224ea5be891a6b25301,
+    type: 2}
+  _matchesDestroyed: {fileID: 11400000, guid: db03715b1e4dc2b48ba30a7ebcc59c1a, type: 2}
+  _spawnBombs: {fileID: 11400000, guid: 54ffbe13a5a9c714db90c4bafd531db3, type: 2}
+  _scoreGem: {fileID: 11400000, guid: dcd013e1d28f0fd469f0bee8d601110e, type: 2}
+  _currentMatches: {fileID: 11400000, guid: 370829c4aab3586478cc3ef361ab09b6, type: 2}
+  _gemsToExplode: {fileID: 11400000, guid: 05b8b01b5b1515c4383e4a1357d52275, type: 2}
+  _gameBoardReference: {fileID: 11400000, guid: 454b3dc0fb000244db78a8aa49f0dc9f,
+    type: 2}
+  _bombSpawnPositions: {fileID: 11400000, guid: 16f8603838c2d0f488b8771b943aa754,
+    type: 2}
+--- !u!114 &1879498219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 74d4c9d7917bcfc4c824947db9e66754, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498218}
+        m_TargetAssemblyTypeName: GemDestroyer, Assembly-CSharp
+        m_MethodName: DestroyAllMatches
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 9f05c8cebed10c249a1d981ca67b1f24, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498212}
+        m_TargetAssemblyTypeName: GemSpawner, Assembly-CSharp
+        m_MethodName: OnCascadeGems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a93a8a2f0f5c8f41be0ce587d52fe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentMatches: {fileID: 11400000, guid: 370829c4aab3586478cc3ef361ab09b6, type: 2}
+  _bombsToDetonate: {fileID: 11400000, guid: c862b99bed112094da72c5677c0015dd, type: 2}
+  _gemsToExplode: {fileID: 11400000, guid: 05b8b01b5b1515c4383e4a1357d52275, type: 2}
+  _currentGameBoardReference: {fileID: 11400000, guid: 454b3dc0fb000244db78a8aa49f0dc9f,
+    type: 2}
+--- !u!114 &1879498222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: f1cc55b33fecb224ea5be891a6b25301, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498221}
+        m_TargetAssemblyTypeName: BombMarker, Assembly-CSharp
+        m_MethodName: MarkBombsToDetonate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 30b9dc484046ec14a8bc32ec41583988, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498218}
+        m_TargetAssemblyTypeName: GemDestroyer, Assembly-CSharp
+        m_MethodName: ExplodeBombedGems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: b8aa06a53d2f6f24d899926038cde3f6, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498221}
+        m_TargetAssemblyTypeName: BombMarker, Assembly-CSharp
+        m_MethodName: DetonateBombs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1879498225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879498208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b8eb5bfe94ef4390243b04521c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 54ffbe13a5a9c714db90c4bafd531db3, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1879498212}
+        m_TargetAssemblyTypeName: GemSpawner, Assembly-CSharp
+        m_MethodName: OnSpawnBombs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1898594229
 GameObject:
   m_ObjectHideFlags: 0

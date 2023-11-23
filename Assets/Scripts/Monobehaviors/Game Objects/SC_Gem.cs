@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SC_Gem : MonoBehaviour
 {
+    [Header("Events")]
+    [SerializeField] VoidEvent _findAllMatches;
+    [SerializeField] VoidEvent _destroyAllMatches;
     [HideInInspector]
     public Vector2Int posIndex;
 
@@ -108,7 +111,7 @@ public class SC_Gem : MonoBehaviour
         scGameLogic.SetState(GlobalEnums.GameState.wait);
 
         yield return new WaitForSeconds(.5f);
-        scGameLogic.FindAllMatches();
+        _findAllMatches.Raise();
 
         if (otherGem != null)
         {
@@ -125,7 +128,7 @@ public class SC_Gem : MonoBehaviour
             }
             else
             {
-                scGameLogic.DestroyMatches();
+                _destroyAllMatches.Raise();
             }
         }
     }

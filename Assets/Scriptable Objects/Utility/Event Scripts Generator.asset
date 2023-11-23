@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375b34715473c3b4095445bc410af3b1, type: 3}
+  m_Name: Event Scripts Generator
+  m_EditorClassIdentifier: 
+  _eventsFolder: {fileID: 102900000, guid: 28041fcca967be943840c39f87b1ce3d, type: 3}
+  _eventListenersFolder: {fileID: 102900000, guid: dcf097991b4b9fc46b170cdac5d1a190,
+    type: 3}
+  _eventEditorsFolder: {fileID: 102900000, guid: cc446df219399aa48917021b057f90ef,
+    type: 3}
+  _eventsTemplate: {fileID: 11500000, guid: 0055758e8ce514b4aa318e5f091ac9c7, type: 3}
+  _eventListenersTemplate: {fileID: 11500000, guid: baf45d8bd1f385947aa5a3543514de6c,
+    type: 3}
+  _eventEditorsTemplate: {fileID: 11500000, guid: 51d5b9c7a0045774b8cbdce724421a2e,
+    type: 3}
+  _eventType: SC_Gem
